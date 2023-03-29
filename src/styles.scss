@@ -1,1 +1,152 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap");
+
+$dark-primary: hsl(318deg 34% 18%);
+$light-primary: hsl(0deg 21% 58%);
+$secondary: rgb(228, 213, 213);
+
+.bg-mint {
+  background-color: $dark-primary;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: $secondary;
+}
+body {
+  margin: 0;
+}
+* {
+  font-family: "Cairo", serif !important;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 9;
+  overflow: hidden;
+  top: 2.5%;
+  right: 0;
+  width: 50px;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow: 0 0 5px 5px #0008;
+  &:hover {
+    width: 100px;
+    .nav-item {
+      .nav-item-text {
+        display: block;
+      }
+    }
+  }
+  .nav-item {
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+
+    &.active,
+    &:hover {
+      background-color: $light-primary;
+    }
+
+    .nav-item-text {
+      display: none;
+    }
+  }
+  .logo {
+    background-color: $secondary;
+  }
+}
+
+.page-header {
+  font-weight: 600 !important;
+}
+
+.card.group-show {
+  cursor: pointer;
+  transition: all 0.25s;
+  background-color: $dark-primary;
+  color: #fff;
+  font-family: "Almarai";
+  &:hover {
+    box-shadow: 0px 0px 5px 8px #0004;
+  }
+  .card-img-top {
+    height: 140px;
+  }
+}
+
+.data-table {
+  background: $dark-primary;
+  color: #fff;
+  position: relative;
+  width: 100%;
+  margin-top: 70px;
+  border-radius: 15px;
+  table-layout: fixed;
+  thead {
+    th {
+      padding: 15px;
+      &:not(:last-child) {
+        border-left: 1px solid #fff4;
+      }
+      border-bottom: 1px solid #fff4;
+    }
+  }
+  tbody {
+    background: $light-primary;
+    overflow: scroll;
+    max-height: 400px;
+    tr {
+      border-bottom: 1px solid #fff4;
+      td {
+        padding: 10px;
+      }
+    }
+  }
+  tfoot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    button {
+      background: none;
+      color: #fff;
+      padding: 10px;
+      border: none;
+    }
+  }
+}
+
+.tabs {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: $dark-primary;
+  .nav-item {
+    transition: all 0.2s;
+    cursor: pointer;
+    a {
+      color: #fff;
+    }
+    &:hover,
+    &.active {
+      background-color: $light-primary;
+    }
+  }
+}
+
+.card {
+  background-color: $light-primary;
+}
+
+@media screen and (max-width: 568px) {
+  #main-wrapper {
+    width: calc(100% - 50px);
+    margin-right: 50px;
+  }
+}

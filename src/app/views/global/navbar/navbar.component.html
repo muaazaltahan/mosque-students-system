@@ -1,0 +1,53 @@
+<div
+  class="navbar justify-content-start align-items-start bg-mint py-0 px-0 text-light"
+>
+  <div
+    class="nav-item w-100 text-center p-3"
+    title="المنزل"
+    routerLink=""
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    <fa-icon [icon]="home" size="lg"></fa-icon>
+    <div class="nav-item-text ps-2">الرئيسية</div>
+  </div>
+  <div
+    class="nav-item w-100 text-center p-3"
+    title="جميع الطلاب"
+    routerLink="all-students"
+    routerLinkActive="active"
+  >
+    <fa-icon [icon]="table" size="lg"></fa-icon>
+    <div class="nav-item-text ps-2">الطلاب</div>
+  </div>
+  <div
+    class="nav-item w-100 text-center p-3"
+    title="الحلقات"
+    routerLink="groups"
+    routerLinkActive="active"
+  >
+    <fa-icon [icon]="group" size="lg"></fa-icon>
+    <div class="nav-item-text ps-2">الحلقات</div>
+  </div>
+  <div
+    class="nav-item w-100 text-center p-3"
+    title="البحث"
+    routerLink="search"
+    routerLinkActive="active"
+  >
+    <fa-icon [icon]="search" size="lg"></fa-icon>
+    <div class="nav-item-text ps-2">البحث</div>
+  </div>
+  <div
+    class="nav-item w-100 text-center p-3"
+    title="إضافة"
+    routerLink="new"
+    routerLinkActive="active"
+  >
+    <fa-icon [icon]="plus" size="lg"></fa-icon>
+    <div class="nav-item-text ps-2">إضافة</div>
+  </div>
+  <div class="mt-auto logo py-2 w-100">
+    <img src="/assets/logo.png" width="50" height="50" alt="LOGO" />
+  </div>
+</div>
