@@ -1,33 +1,8 @@
-export class Mosque {
-  id: number;
-  name: string;
-  image: string;
-}
-
 export enum SystemTypes {
   points = 1,
   awards = 2,
   recite = 3
 }
-
-export class Course {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  systemType: SystemTypes
-  mosqueId: number;
-}
-
-export class Group {
-  id: number;
-  name: string;
-  image: string;
-  courseId: number;
-  teacherId: number;
-  points?: number;
-}
-
 
 export enum Roles {
   Admin = 1,
@@ -35,41 +10,76 @@ export enum Roles {
   Student = 3
 }
 
+export enum AdminTypes {
+  Helper = 1,
+  Responsible = 2
+}
+
+export enum AttStatus {
+  Recite = 1,
+  Lesson = 2
+}
+
+export class Mosque {
+  id: number;
+  ownerId: number;
+  name: string;
+  image: string;
+}
+
+export class Course {
+  id: number;
+  mosqueId: number;
+  name: string;
+  description: string;
+  image: string;
+  systemType: SystemTypes
+}
+
+export class Group {
+  id: number;
+  courseId: number;
+  mousqueId: number;
+  teacherId: number;
+  name: string;
+  image: string;
+  totalPoints?: number;
+}
+
 export abstract class User {
   id: number;
-  name: string;
-  groupId: number;
-  birth: string;
   courseId: number;
+  mousqueId: number;
+  name: string;
   role: Roles
 }
 
+export class Teacher extends User {
+  groupId: number;
+}
+
 export class Student extends User {
+  groupId: number;
   level: number;
   points: number;
+  birth: string;
 }
 
-// export class Admin extends User {
+export class Admin extends User {
+  adminType: AdminTypes;
+}
 
-// }
-
-// export class Teacher extends User {
-
-// }
-
-export abstract class AttDay {
+export class Attendance {
   id: number;
-  studentIds: number[];
+  studentId: number;
   date: string;
-  notes?: string;
-  points?: number; // to give points for attendance
-  absencePoints?: number; // to delete points for absence
+  status: AttStatus;
 }
 
-export class ReciteDay extends AttDay {
-  pages: number;
+export class Page {
+  id: number;
+  studentId: number;
+  partNumber: number;
+  pageNumber: number;
+  date: string;
 }
-
-// export class LessonDay extends AttDay {
-
-// }

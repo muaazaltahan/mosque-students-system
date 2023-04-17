@@ -9,7 +9,8 @@ export const STUDENTS_DATA: Student[] = [
     courseId: 1,
     groupId: 1,
     role: Roles.Student,
-    points: 0
+    points: 0,
+    mousqueId: 1
   }
 ]
 
@@ -19,42 +20,48 @@ export const GROUPS: Group[] = [
     name: "النور",
     image: "/assets/groups/primary/nour.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   },
   {
     id: 0,
     name: "الأبرار",
     image: "/assets/groups/primary/abrar.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   },
   {
     id: 0,
     name: "الفاروق",
     image: "/assets/groups/primary/farouq.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   },
   {
     id: 0,
     name: "الحكمة",
     image: "/assets/groups/primary/hekmah.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   },
   {
     id: 0,
     name: "النعيم",
     image: "/assets/groups/primary/naeem.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   },
   {
     id: 0,
     name: "الصديق",
     image: "/assets/groups/primary/seddeq.jpg",
     courseId: 1,
-    teacherId: 1
+    teacherId: 1,
+    mousqueId: 1
   }
 ]
 

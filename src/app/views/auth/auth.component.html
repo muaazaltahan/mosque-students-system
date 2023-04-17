@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="card my-5">
+    <div class="card-body">
+      <div class="p-2 text-light">
+        <h4 class="fs-1 p-1 page-header">التسجيل</h4>
+        <p class="fs-4 p-3">قم بالتسجيل أو تسجيل الدخول إلى حسابك</p>
+      </div>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-sm-12 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <mat-tab-group class="w-100">
+            <mat-tab label="تسجيل الدخول" [formGroup]="signinForm">
+              <div
+                class="row mw-100 p-3 justify-content-center align-items-center"
+              >
+                <div class="form-group col-sm-12 col-lg-6">
+                  <input
+                    class="form-control mt-3"
+                    type="email"
+                    formControlName="email"
+                  />
+                </div>
+                <div class="form-group col-sm-12 col-lg-6">
+                  <input
+                    class="form-control mt-3"
+                    type="password"
+                    formControlName="password"
+                  />
+                </div>
+                <div class="form-group col-sm-12 col-lg-6">
+                  <button class="custom-btn custom-btn-primary w-100 mt-3">
+                    تسجيل الدخول
+                  </button>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="التسجيل"> </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="login-preview">
+            <div class="logo">
+              <img width="200" src="/assets/logo.png">
+            </div>
+            <div class="describe-text">
+              أهلاً بك في منصة قمًة, إدارة دورات تحفيظ القرآن الكريم بخطوات سهلة وبسيطة
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', loadChildren: () => import('./views/home/home.module').then(m => m.HomeModule) },
+  { path: 'auth', loadChildren: () => import('./views/auth/auth.module').then(m => m.AuthModule) },
   { path: 'groups', loadChildren: () => import('./views/groups/groups.module').then(m => m.GroupsModule) }
 ];
 

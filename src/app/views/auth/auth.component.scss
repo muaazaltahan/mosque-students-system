@@ -1,0 +1,12 @@
+:host {
+  ::ng-deep {
+    .mat-tab-label {
+      font-weight: 400;
+    }
+    .mat-tab-label-active {
+      background-color: hsl(318deg 34% 18%);
+      border-top-right-radius: 15px;
+      border-top-left-radius: 15px;
+    }
+  }
+}
