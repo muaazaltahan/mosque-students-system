@@ -1,12 +1,16 @@
 :host {
   ::ng-deep {
     .mat-tab-label {
-      font-weight: 400;
-    }
-    .mat-tab-label-active {
-      background-color: hsl(318deg 34% 18%);
+      font-weight: 600;
+      transition: all 0.2s;
       border-top-right-radius: 15px;
       border-top-left-radius: 15px;
+      margin-right: 15px;
+      background-color: hsla(319, 35%, 18%, 0.884);
+    }
+    .mat-tab-label-active {
+      opacity: 1;
+      background-color: hsl(318deg 34% 18%);
     }
   }
 }

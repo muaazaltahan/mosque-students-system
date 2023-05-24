@@ -44,6 +44,7 @@ export class Group {
   name: string;
   image: string;
   totalPoints?: number;
+  totalStudents?: number;
 }
 
 export abstract class User {
@@ -67,6 +68,11 @@ export class Student extends User {
 
 export class Admin extends User {
   adminType: AdminTypes;
+}
+
+export interface UserToken {
+  token: string;
+  expiration: number;
 }
 
 export class Attendance {

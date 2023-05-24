@@ -21,7 +21,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/nour.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   },
   {
     id: 0,
@@ -29,7 +31,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/abrar.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   },
   {
     id: 0,
@@ -37,7 +41,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/farouq.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   },
   {
     id: 0,
@@ -45,7 +51,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/hekmah.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   },
   {
     id: 0,
@@ -53,7 +61,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/naeem.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   },
   {
     id: 0,
@@ -61,7 +71,9 @@ export const GROUPS: Group[] = [
     image: "/assets/groups/primary/seddeq.jpg",
     courseId: 1,
     teacherId: 1,
-    mousqueId: 1
+    mousqueId: 1,
+    totalStudents: 15,
+    totalPoints: 560
   }
 ]
 
