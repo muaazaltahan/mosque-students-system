@@ -2,33 +2,102 @@
   <div class="login">
     <div class="form-container">
       <p class="title">Login</p>
-      <form class="form">
+      <form @submit.prevent="login" class="form">
         <div class="input-group">
-          <label for="username">Username</label>
-          <input type="text" name="username" id="username" placeholder="" />
+          <label for="email">Email</label>
+          <input
+            v-model="email"
+            type="text"
+            name="email"
+            id="email"
+            placeholder=""
+          />
         </div>
         <div class="input-group">
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" placeholder="" />
+          <input
+            v-model="password"
+            type="password"
+            name="password"
+            id="password"
+            placeholder=""
+          />
           <div class="forgot">
             <a rel="noopener noreferrer" href="#">Forgot Password ?</a>
           </div>
         </div>
         <button class="sign">Log in</button>
       </form>
+      <div class="">
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { useAuthStore } from "@/store/auth";
+import { mapActions } from "pinia";
 export default {
   name: "LogIn",
+  data() {
+    return {
+      email: "",
+      password: "",
+      errorMessage: "",
+    };
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["setToken", "setTokens"]),
+    async login() {
+      const loginData = {
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        const response = await fetch(
+          "http://muaazaltahan-001-site1.dtempurl.com/api/auth/app-admin/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginData),
+          }
+        );
+        if (!response.ok) {
+          console.log(response.error);
+          throw new Error("Login failed");
+        }
+        const data = await response.json();
+        localStorage.setItem("_user", JSON.stringify(data));
+        this.setToken(data.accessToken);
+        console.log(data.accessToken);
+        console.log(data.userId);
+        console.log(data.token && data.refreshToken);
+        console.log(data.token);
+        console.log(data.refreshToken);
+        // for set  data.token && data.refreshToken at auth
+        if (data.token && data.refreshToken) {
+          console.log(`if${data.token && data.refreshToken}`);
+          console.log(`if${data.token}`);
+          console.log(`if${data.refreshToken}`);
+
+          this.setTokens(data.token, data.refreshToken, data.userId);
+        }
+
+        this.$router.push("/");
+      } catch (error) {
+        this.errorMessage = error.message;
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .login {
-  background-color: rgba(17, 24, 39, 1);
+  background-color: var(--color-close-dark);
   width: 100%;
   height: 100vh;
   display: flex;
@@ -39,7 +108,6 @@ export default {
 .form-container {
   width: 320px;
   border-radius: 0.75rem;
-  /* background-color: rgba(17, 24, 39, 1); */
   padding: 2rem;
   color: rgba(243, 244, 246, 1);
 }
@@ -72,13 +140,13 @@ export default {
   border-radius: 0.375rem;
   border: 1px solid rgba(55, 65, 81, 1);
   outline: 0;
-  background-color: rgba(17, 24, 39, 1);
+  background-color: var(--color-close-dark);
   padding: 0.75rem 1rem;
   color: rgba(243, 244, 246, 1);
 }
 
 .input-group input:focus {
-  border-color: #2188ff;
+  border-color: var(--color-blue);
 }
 
 .forgot {
@@ -86,34 +154,39 @@ export default {
   justify-content: flex-end;
   font-size: 0.75rem;
   line-height: 1rem;
-  color: #2188ff;
+  color: var(--color-blue);
   margin: 8px 0 14px 0;
 }
 
 .forgot a {
-  color: #2188ff;
+  color: var(--color-blue);
   text-decoration: none;
   font-size: 14px;
 }
 
 .forgot a:hover {
-  text-decoration: underline #2188ff;
+  text-decoration: underline var(--color-blue);
 }
 
 .sign {
   display: block;
   width: 100%;
-  background-color: #2188ff;
+  background-color: var(--color-blue);
   padding: 0.75rem;
   text-align: center;
-  color: rgba(17, 24, 39, 1);
+  color: var(--color-close-dark);
   border: none;
   border-radius: 0.375rem;
   font-weight: 600;
+  color: white;
 }
-@media (max-width: 400px) {
-  .login {
-    background-color: rgba(17, 24, 39, 1);
-  }
+.sign:hover {
+  background-color: rgb(0, 183, 255);
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 15px;
 }
 </style>
