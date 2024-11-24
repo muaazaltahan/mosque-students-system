@@ -32,17 +32,33 @@ export default {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
+    this.refreshAccessToken();
   },
 };
 </script>
 
-<style lang="scss">
+<style>
+@font-face {
+  font-family: "Roboto";
+  src: url("@/assets/fonts/roboto-bold-webfont.woff2") format("woff2"),
+    url("@/assets/fonts/roboto-bold-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("@/assets/fonts/roboto-regular-webfont.woff2") format("woff2"),
+    url("@/assets/fonts/roboto-regular-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
 :root {
   --color-blue: #2188ff;
   --color-close-dark: rgba(17, 24, 39, 1);
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
