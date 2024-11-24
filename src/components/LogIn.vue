@@ -31,6 +31,11 @@
       <div class="">
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
       </div>
+      <div class="center-load" v-if="isLoading">
+        <svg viewBox="25 25 50 50">
+          <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -45,11 +50,13 @@ export default {
       email: "",
       password: "",
       errorMessage: "",
+      isLoading: false,
     };
   },
   methods: {
     ...mapActions(useAuthStore, ["setToken", "setTokens"]),
     async login() {
+      this.isLoading = true;
       const loginData = {
         email: this.email,
         password: this.password,
@@ -66,29 +73,20 @@ export default {
           }
         );
         if (!response.ok) {
-          console.log(response.error);
           throw new Error("Login failed");
         }
         const data = await response.json();
         localStorage.setItem("_user", JSON.stringify(data));
         this.setToken(data.accessToken);
-        console.log(data.accessToken);
-        console.log(data.userId);
-        console.log(data.token && data.refreshToken);
-        console.log(data.token);
-        console.log(data.refreshToken);
         // for set  data.token && data.refreshToken at auth
         if (data.token && data.refreshToken) {
-          console.log(`if${data.token && data.refreshToken}`);
-          console.log(`if${data.token}`);
-          console.log(`if${data.refreshToken}`);
-
           this.setTokens(data.token, data.refreshToken, data.userId);
         }
-
         this.$router.push("/");
       } catch (error) {
         this.errorMessage = error.message;
+      } finally {
+        this.isLoading = false;
       }
     },
   },
@@ -188,5 +186,49 @@ export default {
   font-size: 14px;
   text-align: center;
   margin-top: 15px;
+}
+/* loading */
+.center-load {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
 }
 </style>

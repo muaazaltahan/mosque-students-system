@@ -1,20 +1,18 @@
 <template>
-  <NavBar></NavBar>
-  <div class="support">
-    <h1>Contact Us</h1>
-    <SupportForm />
+  <div class="all">
+    <div class="support">
+      <SupportForm />
+    </div>
   </div>
 </template>
 
 <script>
 import SupportForm from "@/components/Support/SupportForm.vue";
-import NavBar from "@/components/NavBar.vue";
-
+import "@/assets/bg-color.css";
 export default {
   name: "SupportPage",
   components: {
     SupportForm,
-    NavBar,
   },
 };
 </script>
@@ -22,11 +20,6 @@ export default {
 <style scoped>
 .support {
   background-color: var(--color-close-dark);
-  min-height: 100vh;
-}
-h1 {
-  padding-top: 10px;
-  text-align: center;
-  color: white;
+  height: 100vh;
 }
 </style>

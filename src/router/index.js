@@ -6,6 +6,7 @@ import UsersPage from "@/views/UsersPage.vue";
 import SupportPage from "@/views/SupportPage.vue";
 import LogIn from "@/components/LogIn.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
+import ViewIssues from "@/views/ViewIssues.vue";
 
 const routes = [
   {
@@ -35,7 +36,13 @@ const routes = [
     path: "/support",
     name: "support",
     component: SupportPage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
+  },
+  {
+    path: "/view-issues",
+    name: "view-issues",
+    component: ViewIssues,
+    meta: { requiresAuth: false },
   },
 
   // stays last thing
