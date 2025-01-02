@@ -13,7 +13,12 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuthStore, ["isAuthenticated", "isTokenNearExpiry"]),
+    ...mapState(useAuthStore, [
+      "isAuthenticated",
+      "isTokenNearExpiry",
+      "token",
+      "userId",
+    ]),
   },
   methods: {
     ...mapActions(useAuthStore, ["refreshAccessToken"]),
@@ -32,7 +37,11 @@ export default {
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
-    this.refreshAccessToken();
+  },
+  beforeMount() {
+    if (this.userId && this.token) {
+      this.refreshAccessToken();
+    }
   },
 };
 </script>

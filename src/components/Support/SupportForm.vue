@@ -1,14 +1,15 @@
 <template>
   <div class="title">
-    <h1 class="line">Connect With Us</h1>
+    <h1 class="line">تواصل معنا</h1>
     <p class="line">
-      If you have any issues or questions, feel free to reach out!
+      إذا كانت لديك أي مشاكل أو أسئلة، فلا تتردد في التواصل معنا
     </p>
   </div>
+
   <div class="support-form">
     <form @submit.prevent="handleSubmit">
       <div class="form-group">
-        <label for="title">Your Title</label>
+        <label for="title">العنوان</label>
         <input
           type="text"
           id="title"
@@ -16,10 +17,10 @@
           :class="{ error: errors.title }"
           placeholder=""
         />
-        <p v-if="errors.title" class="error-message">title is required.</p>
+        <p v-if="errors.title" class="error-message">العنوان مطلوب.</p>
       </div>
       <div class="form-group">
-        <label for="phone">Your Phone</label>
+        <label for="phone">رقم الجوال</label>
         <input
           type="text"
           id="phone"
@@ -28,26 +29,26 @@
           placeholder=""
         />
         <p v-if="errors.phone" class="error-message">
-          phone is required and he should be namber .
+          رقم الجوال مطلوب ويجب أن يكون رقم.
         </p>
       </div>
 
       <div class="form-group">
-        <label for="emailAddress">Your Email</label>
+        <label for="emailAddress">الإيميل</label>
         <input
           type="email"
           id="emailAddress"
           v-model="formData.emailAddress"
           :class="{ error: errors.emailAddress }"
-          placeholder=""
+          placeholder="مثل 'ex@gmail.com'"
         />
         <p v-if="errors.emailAddress" class="error-message">
-          Valid emailAddress is required.
+          عنوان بريد إلكتروني صالح مطلوب.
         </p>
       </div>
 
       <div class="form-group">
-        <label for="description">Message</label>
+        <label for="description">الرسالة</label>
         <textarea
           id="description"
           v-model="formData.description"
@@ -55,18 +56,17 @@
           placeholder=""
         ></textarea>
         <p v-if="errors.description" class="error-message">
-          Message is required and it must contain at 10 least 10 characters and
-          it must under 500 characters.
+          الرسالة مطلوبة ويجب أن تحتوي على أكثر من 10 أحرف و أقل من 500 حرف.
         </p>
       </div>
-      <button type="submit" class="submit-button">Submit</button>
+      <button type="submit" class="submit-button">إرسال</button>
     </form>
 
     <p v-if="submitStatus === 'success'" class="success-message">
-      Your description has been sent!
+      لقد تم الإرسال بنجاح
     </p>
     <p v-if="submitStatus === 'error'" class="error-message">
-      Failed to send your description. Please try again.
+      .فشل إرسال المشكلة الخاص بك. يرجى المحاولة مرة أخرى
     </p>
     <div class="center-load" v-if="isLoading">
       <svg viewBox="25 25 50 50">
@@ -127,7 +127,7 @@ export default {
         this.isLoading = true;
         try {
           const response = await fetch(
-            "http://muaazaltahan-001-site1.dtempurl.com/api/Support",
+            "https://muaazaltahan-001-site1.dtempurl.com/api/Support",
             {
               method: "POST",
               headers: {
@@ -139,8 +139,6 @@ export default {
 
           if (response.ok) {
             this.submitStatus = "success";
-            console.log("Form Submitted:", await response.json());
-
             this.formData = {
               title: "",
               emailAddress: "",
@@ -169,18 +167,20 @@ export default {
 .support-form {
   max-width: 600px;
   margin: 10px auto;
-  padding: 10px;
   background-color: var(--color--close-dark);
   border-radius: 10px;
+  padding-right: 20px;
 }
 .title {
   text-align: center;
   padding-top: 4px;
+  direction: rtl;
 }
 h1 {
   color: white;
   display: inline;
   margin-right: 20px;
+  margin-left: 20px;
   margin-bottom: 8px;
 }
 
@@ -203,6 +203,7 @@ label {
   margin-bottom: 5px;
   font-weight: bold;
   color: rgba(156, 163, 175, 1);
+  direction: rtl;
 }
 
 input,
@@ -215,6 +216,7 @@ textarea {
   box-sizing: border-box;
   background-color: var(--color--close-dark);
   color: #ffff;
+  direction: rtl;
 }
 textarea {
   height: 150px;
@@ -230,12 +232,16 @@ textarea.error {
   margin-top: 20px;
   color: red;
   font-size: 14px;
+  direction: rtl;
 }
 
 .success-message {
   color: green;
-  font-size: 16px;
+  font-size: 20px;
   margin-top: 20px;
+  margin-bottom: 10px;
+  direction: rtl;
+  text-align: center;
 }
 
 input:focus,
@@ -246,6 +252,7 @@ textarea:focus {
 }
 /*  */
 .submit-button {
+  margin-left: calc(100% - 71px);
   padding: 10px 20px;
   font-size: 16px;
   background-color: #007bff;

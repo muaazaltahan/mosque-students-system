@@ -24,7 +24,7 @@ const routes = [
     path: "/notifications",
     name: "notifications",
     component: NotificationPage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
   {
     path: "/users",
@@ -42,7 +42,7 @@ const routes = [
     path: "/view-issues",
     name: "view-issues",
     component: ViewIssues,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 
   // stays last thing
