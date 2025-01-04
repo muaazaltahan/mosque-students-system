@@ -3,45 +3,51 @@ import jwt_decode from "jwt-decode";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    token: localStorage.getItem("token") || null,
-    refreshToken: null,
-    tokenExpiry: null,
-    userId: null,
+    token: localStorage.getItem("token"),
+    tokenExpiry: localStorage.getItem("tokenExpiry")
+      ? parseInt(localStorage.getItem("tokenExpiry"), 10)
+      : null,
+    userId: JSON.parse(localStorage.getItem("_user"))?.userId || null,
   }),
   actions: {
     setToken(token) {
       this.token = token;
       localStorage.setItem("token", token);
     },
-    setTokens(token, refreshToken, userId) {
+    setTokens(token, userId) {
       this.token = token;
-      this.refreshToken = refreshToken;
       this.userId = userId;
-      localStorage.setItem("token", token);
+      if (token) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("_user", JSON.stringify({ userId }));
+      } else {
+        // router.push("/login");
+      }
       const decodedToken = jwt_decode(token);
       this.tokenExpiry = decodedToken.exp * 1000;
+      localStorage.setItem("tokenExpiry", this.tokenExpiry);
     },
 
     async refreshAccessToken() {
       try {
         const response = await fetch(
-          `http://muaazaltahan-001-site1.dtempurl.com/api/auth/app-admin/refresh-access-token/${this.userId}`,
+          `https://muaazaltahan-001-site1.dtempurl.com/api/auth/app-admin/refresh-access-token/${this.userId}`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${this.refreshToken}`,
             },
           }
         );
 
         const data = await response.json();
-        if (data.token) {
-          this.setTokens(data.token, this.refreshToken);
+        if (data.accessToken) {
+          this.setTokens(data.accessToken, this.userId);
         }
       } catch (error) {
         console.error("Error refreshing token:", error);
         this.logout();
+        // router.push("/login");
       }
     },
 
@@ -56,7 +62,6 @@ export const useAuthStore = defineStore("auth", {
   getters: {
     isAuthenticated: () => {
       const tokenInLocalStorage = localStorage.getItem("token");
-      // if localstorge emty return true and if ather thing return false
       return !tokenInLocalStorage;
     },
     isTokenNearExpiry: (state) => {

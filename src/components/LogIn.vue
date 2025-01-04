@@ -63,7 +63,7 @@ export default {
       };
       try {
         const response = await fetch(
-          "http://muaazaltahan-001-site1.dtempurl.com/api/auth/app-admin/login",
+          "https://muaazaltahan-001-site1.dtempurl.com/api/auth/app-admin/login",
           {
             method: "POST",
             headers: {
@@ -78,9 +78,8 @@ export default {
         const data = await response.json();
         localStorage.setItem("_user", JSON.stringify(data));
         this.setToken(data.accessToken);
-        // for set  data.token && data.refreshToken at auth
-        if (data.token && data.refreshToken) {
-          this.setTokens(data.token, data.refreshToken, data.userId);
+        if (data.token) {
+          this.setTokens(data.token, data.userId);
         }
         this.$router.push("/");
       } catch (error) {
@@ -100,7 +99,6 @@ export default {
   height: 100vh;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   padding-top: 5%;
 }
 .form-container {

@@ -39,7 +39,7 @@
                   {{ issue.isDone ? "Read" : "Unread" }}
                 </div>
               </td>
-              <td>{{ new Date(issue.createdAt).toLocaleString() }}</td>
+              <td>{{ issue.createdAt }}</td>
             </tr>
           </tbody>
         </table>
@@ -104,7 +104,7 @@ export default {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "http://muaazaltahan-001-site1.dtempurl.com/api/Support",
+        "https://muaazaltahan-001-site1.dtempurl.com/api/Support",
         {
           method: "GET",
           headers: {
@@ -130,7 +130,7 @@ export default {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `http://muaazaltahan-001-site1.dtempurl.com/api/Support/mark-done/${issue.id}`,
+          `https://muaazaltahan-001-site1.dtempurl.com/api/Support/mark-done/${issue.id}`,
           {
             method: "PUT",
             headers: {
