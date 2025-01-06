@@ -1,6 +1,9 @@
 <template>
   <div class="Notification">
     <NavBar></NavBar>
+    <router-link to="/show-notification" class="link">
+      <buttom class="router-btn">عرض الاشعارات</buttom>
+    </router-link>
     <div class="notifications-page">
       <div class="container">
         <h1 class="title">الاشعارات</h1>
@@ -38,6 +41,12 @@
         </svg>
       </div>
     </div>
+    <p v-if="submitStatus === 'success'" class="success-message">
+      لقد تم الإرسال بنجاح
+    </p>
+    <p v-if="submitStatus === 'error'" class="error-message">
+      .فشل إرسال المشكلة الخاص بك. يرجى المحاولة مرة أخرى
+    </p>
   </div>
 </template>
 
@@ -56,8 +65,7 @@ export default {
         userId: null,
         createdAt: new Date(),
       },
-      errorMessMess: "",
-      succesMessMess: "",
+      submitStatus: "",
     };
   },
   components: {
@@ -66,7 +74,7 @@ export default {
   methods: {
     async sendMess() {
       if (!this.formData.title && !this.formData.content) {
-        this.errorMess = "error, must full all input";
+        this.submitStatus = "error, must full all input";
       } else {
         this.isLoading = true;
         try {
@@ -84,7 +92,7 @@ export default {
           );
 
           if (response.ok) {
-            this.succesMess = "succes";
+            this.submitStatus = "success";
             this.formData = {
               title: "",
               content: "",
@@ -95,11 +103,11 @@ export default {
               createdAt: new Date(),
             };
           } else {
-            this.errorMess = "error with send mess";
+            this.submitStatus = "error with send mess";
             console.error("Submission failed:", response.statusText);
           }
         } catch (error) {
-          this.errorMess = "error";
+          this.submitStatus = "error";
           console.error("Submission failed:", error);
         } finally {
           this.isLoading = false;
@@ -111,6 +119,26 @@ export default {
 </script>
 
 <style scoped>
+.router-btn {
+  margin-top: 10px;
+  width: 200px;
+  height: 60px;
+  border: 3px solid var(--color-blue);
+  border-radius: 40px;
+  transition: all 0.3s;
+  cursor: pointer;
+  background: white;
+  font-size: 1.2em;
+  color: black;
+  margin-left: 45%;
+}
+.link {
+  text-decoration: none;
+}
+.router-btn:hover {
+  background: var(--color-blue);
+  color: white;
+}
 .notifications-page {
   display: flex;
   justify-content: center;
@@ -192,6 +220,21 @@ select:focus {
   background-color: #0056b3;
 }
 
+.error-message {
+  margin-top: 20px;
+  color: red;
+  font-size: 14px;
+  direction: rtl;
+  text-align: center;
+}
+.success-message {
+  color: green;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  direction: rtl;
+  text-align: center;
+}
 /* is loadding  */
 .center-load {
   display: flex;
