@@ -1,13 +1,11 @@
 import { defineStore } from "pinia";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    token: localStorage.getItem("token"),
-    tokenExpiry: localStorage.getItem("tokenExpiry")
-      ? parseInt(localStorage.getItem("tokenExpiry"), 10)
-      : null,
-    userId: JSON.parse(localStorage.getItem("_user"))?.userId || null,
+    token: JSON.parse(localStorage.getItem("_user"))?.accessToken,
+    tokenExpiry: parseInt(localStorage.getItem("tokenExpiry"), 10),
+    userId: JSON.parse(localStorage.getItem("_user"))?.userId,
   }),
   actions: {
     // setToken(token) {
@@ -25,7 +23,7 @@ export const useAuthStore = defineStore("auth", {
         // router.push("/login");
         console.log(this.token);
       }
-      const decodedToken = jwt_decode(token);
+      const decodedToken = jwtDecode(token);
       this.tokenExpiry = decodedToken.exp * 1000;
       localStorage.setItem("tokenExpiry", this.tokenExpiry);
     },
