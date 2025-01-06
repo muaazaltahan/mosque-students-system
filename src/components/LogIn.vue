@@ -77,9 +77,9 @@ export default {
         }
         const data = await response.json();
         localStorage.setItem("_user", JSON.stringify(data));
-        this.setToken(data.accessToken);
-        if (data.token) {
-          this.setTokens(data.token, data.userId);
+        // this.setToken(data.accessToken);
+        if (data.accessToken) {
+          this.setTokens(data.accessToken, data.userId);
         }
         this.$router.push("/");
       } catch (error) {

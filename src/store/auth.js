@@ -10,10 +10,11 @@ export const useAuthStore = defineStore("auth", {
     userId: JSON.parse(localStorage.getItem("_user"))?.userId || null,
   }),
   actions: {
-    setToken(token) {
-      this.token = token;
-      localStorage.setItem("token", token);
-    },
+    // setToken(token) {
+    //   this.token = token;
+    //   localStorage.setItem("token", token);
+    //   console.log(this.token);
+    // },
     setTokens(token, userId) {
       this.token = token;
       this.userId = userId;
@@ -22,6 +23,7 @@ export const useAuthStore = defineStore("auth", {
         localStorage.setItem("_user", JSON.stringify({ userId }));
       } else {
         // router.push("/login");
+        console.log(this.token);
       }
       const decodedToken = jwt_decode(token);
       this.tokenExpiry = decodedToken.exp * 1000;

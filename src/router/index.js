@@ -3,10 +3,12 @@ import { useAuthStore } from "@/store/auth";
 import HomeView from "../views/HomeView.vue";
 import NotificationPage from "@/views/NotificationPage.vue";
 import UsersPage from "@/views/UsersPage.vue";
+import UserAdmin from "@/views/UserAdmin.vue";
 import SupportPage from "@/views/SupportPage.vue";
 import LogIn from "@/components/LogIn.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import ViewIssues from "@/views/ViewIssues.vue";
+import ShowNotification from "@/views/ShowNotification.vue";
 
 const routes = [
   {
@@ -30,8 +32,15 @@ const routes = [
     path: "/users",
     name: "users",
     component: UsersPage,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: false },
   },
+  {
+    path: "/users-admin",
+    name: "users-admin",
+    component: UserAdmin,
+    meta: { requiresAuth: false },
+  },
+
   {
     path: "/support",
     name: "support",
@@ -42,6 +51,12 @@ const routes = [
     path: "/view-issues",
     name: "view-issues",
     component: ViewIssues,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/show-notification",
+    name: "show-notification",
+    component: ShowNotification,
     meta: { requiresAuth: true },
   },
 
