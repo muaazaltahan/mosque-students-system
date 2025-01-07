@@ -26,19 +26,19 @@ const routes = [
     path: "/notifications",
     name: "notifications",
     component: NotificationPage,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: "/users",
     name: "users",
     component: UsersPage,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
   {
     path: "/users-admin",
     name: "users-admin",
     component: UserAdmin,
-    meta: { requiresAuth: false },
+    meta: { requiresAuth: true },
   },
 
   {

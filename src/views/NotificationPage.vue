@@ -78,7 +78,7 @@ export default {
       } else {
         this.isLoading = true;
         try {
-          const token = localStorage.getItem("token");
+          const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
           const response = await fetch(
             "https://muaazaltahan-001-site1.dtempurl.com/api/notifications",
             {

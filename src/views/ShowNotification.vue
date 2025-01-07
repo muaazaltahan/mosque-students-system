@@ -116,7 +116,7 @@ export default {
   //   async created() {
   //     this.isloading = true;
   //     try {
-  //       const token = localStorage.getItem("token");
+  //       const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
   //       const response = await fetch(
   //         "https://muaazaltahan-001-site1.dtempurl.com/api/Support",
   //         {
@@ -142,7 +142,7 @@ export default {
   //     async deleteNot(notification) {
   //       this.isLoading = true;
   //       try {
-  //         const token = localStorage.getItem("token");
+  //         const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
   //         const response = await fetch(
   //           `https://muaazaltahan-001-site1.dtempurl.com/api/Support/mark-done/${issue.id}`,
   //           {

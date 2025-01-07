@@ -1,35 +1,19 @@
 import { defineStore } from "pinia";
-import jwt_decode from "jwt-decode";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
-    token: localStorage.getItem("token"),
-    tokenExpiry: localStorage.getItem("tokenExpiry")
-      ? parseInt(localStorage.getItem("tokenExpiry"), 10)
-      : null,
-    userId: JSON.parse(localStorage.getItem("_user"))?.userId || null,
+    token: JSON.parse(localStorage.getItem("_user"))?.accessToken,
+    tokenExpiry: 50 * 60 * 1000,
+    userId: JSON.parse(localStorage.getItem("_user"))?.userId,
   }),
   actions: {
-    // setToken(token) {
-    //   this.token = token;
-    //   localStorage.setItem("token", token);
-    //   console.log(this.token);
-    // },
     setTokens(token, userId) {
       this.token = token;
       this.userId = userId;
-      if (token) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("_user", JSON.stringify({ userId }));
-      } else {
-        // router.push("/login");
-        console.log(this.token);
-      }
-      const decodedToken = jwt_decode(token);
-      this.tokenExpiry = decodedToken.exp * 1000;
+      localStorage.setItem("token", token);
+      localStorage.setItem("_user", JSON.stringify({ userId }));
       localStorage.setItem("tokenExpiry", this.tokenExpiry);
     },
-    // if ()
     async refreshAccessToken() {
       try {
         const response = await fetch(
@@ -49,7 +33,6 @@ export const useAuthStore = defineStore("auth", {
       } catch (error) {
         console.error("Error refreshing token:", error);
         this.logout();
-        // router.push("/login");
       }
     },
 
@@ -63,7 +46,7 @@ export const useAuthStore = defineStore("auth", {
   },
   getters: {
     isAuthenticated: () => {
-      const tokenInLocalStorage = localStorage.getItem("token");
+      const tokenInLocalStorage = JSON.parse(localStorage.getItem("_user"));
       return !tokenInLocalStorage;
     },
     isTokenNearExpiry: (state) => {

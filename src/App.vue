@@ -39,6 +39,7 @@ export default {
     }
   },
   beforeMount() {
+    if (window.location.hostname.includes("localhost")) return;
     if (this.userId && this.token) {
       this.refreshAccessToken();
     }
