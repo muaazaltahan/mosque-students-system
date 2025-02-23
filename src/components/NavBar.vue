@@ -12,7 +12,7 @@
       <font-awesome-icon icon="fas fa-bell" />
       <p>Notifications</p>
     </router-link>
-    <router-link class="button" to="/users" active-class="active-link">
+    <router-link class="button" to="/users-admin" active-class="active-link">
       <font-awesome-icon icon="fas fa-users" />
       <p>Users</p>
     </router-link>

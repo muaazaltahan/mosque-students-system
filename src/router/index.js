@@ -2,8 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "@/store/auth";
 import HomeView from "../views/HomeView.vue";
 import NotificationPage from "@/views/NotificationPage.vue";
-import UsersPage from "@/views/UsersPage.vue";
-import UserAdmin from "@/views/UserAdmin.vue";
+import UserOwner from "@/views/user/UserOwner.vue";
+import UserAdmin from "@/views/user/UserAdmin.vue";
+import UserStudents from "@/views/user/UserStudents.vue";
+import UserTeachers from "@/views/user/UserTeachers.vue";
 import SupportPage from "@/views/SupportPage.vue";
 import LogIn from "@/components/LogIn.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
@@ -29,15 +31,27 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/users",
+    path: "/users-admin",
     name: "users",
-    component: UsersPage,
+    component: UserAdmin,
     meta: { requiresAuth: true },
   },
   {
-    path: "/users-admin",
-    name: "users-admin",
-    component: UserAdmin,
+    path: "/users-teacher",
+    name: "users-teacher",
+    component: UserTeachers,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/users-student",
+    name: "users-student",
+    component: UserStudents,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/users-owner",
+    name: "users-owner",
+    component: UserOwner,
     meta: { requiresAuth: true },
   },
 

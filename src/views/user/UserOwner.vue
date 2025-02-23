@@ -1,6 +1,17 @@
 <template>
   <div class="users">
     <NavBar></NavBar>
+    <div class="two-btn">
+      <router-link to="/users-admin" class="link">
+        <button class="button">users admin</button>
+      </router-link>
+      <router-link to="/users-teacher" class="link">
+        <button class="button">users teacher</button>
+      </router-link>
+      <router-link to="/users-student" class="link">
+        <button class="button">users student</button>
+      </router-link>
+    </div>
     <div class="center-load" v-if="isLoading && !selectedUser">
       <svg viewBox="25 25 50 50">
         <circle r="20" cy="50" cx="50"></circle>
@@ -74,7 +85,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 export default {
-  name: "UsersAdmin",
+  name: "UsersOwner",
   data() {
     return {
       users: [
@@ -94,32 +105,32 @@ export default {
   components: {
     NavBar,
   },
-  //   async created() {
-  //     this.isloading = true;
-  //     try {
-  //       const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
-  //       const response = await fetch(
-  //         "https://muaazaltahan-001-site1.dtempurl.com/api/users/mosque-users/owner/{mosqueId}",
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: "Bearer " + token,
-  //           },
-  //         }
-  //       );
-  //       if (response.ok) {
-  //         this.users = await response.json();
-  //       } else {
-  // this.submitStatus = "error";
-  //         console.error("Failed to fetch issues:", response.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching issues:", error);
-  //     } finally {
-  //       this.isLoading = false;
-  //     }
-  //   },
+  async created() {
+    this.isloading = true;
+    try {
+      const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
+      const response = await fetch(
+        "https://muaazaltahan-001-site1.dtempurl.com/api/users/mosque-users/owner/{mosqueId}",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.ok) {
+        this.users = await response.json();
+      } else {
+        this.submitStatus = "error";
+        console.error("Failed to fetch issues:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching issues:", error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
   //   methods: {
   //     async deleteNot(user) {
   //       this.isLoading = true;
@@ -412,6 +423,130 @@ circle {
 
   100% {
     stroke-dashoffset: -125px;
+  }
+}
+/* buttom */
+.two-btn {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+.button {
+  position: relative;
+  padding: 10px 22px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background-color: var(--color-blue);
+  transition: all 0.2s ease;
+}
+.active-link .buttom {
+  background-color: var(--color-blue);
+}
+.button:active {
+  transform: scale(0.96);
+}
+
+.button:before,
+.button:after {
+  position: absolute;
+  content: "";
+  width: 150%;
+  left: 50%;
+  height: 100%;
+  transform: translateX(-50%);
+  z-index: -1000;
+  background-repeat: no-repeat;
+}
+
+.button:hover:before {
+  top: -70%;
+  background-image: radial-gradient(
+      circle,
+      var(--color-blue) 20%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle,
+      transparent 20%,
+      var(--color-blue) 20%,
+      transparent 30%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(
+      circle,
+      transparent 10%,
+      var(--color-blue) 15%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+    10% 10%, 18% 18%;
+  background-position: 50% 120%;
+  animation: greentopBubbles 0.6s ease;
+}
+
+@keyframes greentopBubbles {
+  0% {
+    background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+      40% 90%, 55% 90%, 70% 90%;
+  }
+
+  50% {
+    background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+      50% 50%, 65% 20%, 90% 30%;
+  }
+
+  100% {
+    background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+      50% 40%, 65% 10%, 90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.button:hover::after {
+  bottom: -70%;
+  background-image: radial-gradient(
+      circle,
+      var(--color-blue) 20%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(
+      circle,
+      transparent 10%,
+      var(--color-blue) 15%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+  background-position: 50% 0%;
+  animation: greenbottomBubbles 0.6s ease;
+}
+
+@keyframes greenbottomBubbles {
+  0% {
+    background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+      70% -10%, 70% 0%;
+  }
+
+  50% {
+    background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+      105% 0%;
+  }
+
+  100% {
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
 }
 </style>

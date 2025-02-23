@@ -2,11 +2,11 @@
   <div class="users">
     <NavBar></NavBar>
     <div class="two-btn">
-      <router-link to="/users-admin" class="link">
-        <button class="button">users admin</button>
+      <router-link to="/users-teacher" class="link">
+        <button class="button">users teacher</button>
       </router-link>
-      <router-link to="/users" class="link">
-        <button class="button">users</button>
+      <router-link to="/users-student" class="link">
+        <button class="button">users student</button>
       </router-link>
     </div>
     <div class="center-load" v-if="isLoading && !selectedUser">
@@ -82,7 +82,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 export default {
-  name: "UsersPage",
+  name: "UsersAdmin",
   data() {
     return {
       users: [
@@ -102,32 +102,32 @@ export default {
   components: {
     NavBar,
   },
-  //   async created() {
-  //     this.isloading = true;
-  //     try {
-  //       const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
-  //       const response = await fetch(
-  //         "https://muaazaltahan-001-site1.dtempurl.com/api/users/mosque-users/owner/{mosqueId}",
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             Authorization: "Bearer " + token,
-  //           },
-  //         }
-  //       );
-  //       if (response.ok) {
-  //         this.users = await response.json();
-  //       } else {
-  // this.submitStatus = "error";
-  //         console.error("Failed to fetch issues:", response.statusText);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching issues:", error);
-  //     } finally {
-  //       this.isLoading = false;
-  //     }
-  //   },
+  async created() {
+    this.isloading = true;
+    try {
+      const token = JSON.parse(localStorage.getItem("_user"))?.accessToken;
+      const response = await fetch(
+        "https://muaazaltahan-001-site1.dtempurl.com/api/users/mosque-users/admins/{mosqueId}",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.ok) {
+        this.users = await response.json();
+      } else {
+        this.submitStatus = "error";
+        console.error("Failed to fetch issues:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching issues:", error);
+    } finally {
+      this.isLoading = false;
+    }
+  },
   //   methods: {
   //     async deleteNot(user) {
   //       this.isLoading = true;
@@ -422,8 +422,6 @@ circle {
     stroke-dashoffset: -125px;
   }
 }
-
-/* From Uiverse.io by zjssun */
 /* buttom */
 .two-btn {
   display: flex;
@@ -437,7 +435,7 @@ circle {
   border: none;
   color: #fff;
   cursor: pointer;
-  background-color: #7d2ae8;
+  background-color: var(--color-blue);
   transition: all 0.2s ease;
 }
 .active-link .buttom {
@@ -461,15 +459,29 @@ circle {
 
 .button:hover:before {
   top: -70%;
-  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-image: radial-gradient(
+      circle,
+      var(--color-blue) 20%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle,
+      transparent 20%,
+      var(--color-blue) 20%,
+      transparent 30%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(
+      circle,
+      transparent 10%,
+      var(--color-blue) 15%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%);
   background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
     10% 10%, 18% 18%;
   background-position: 50% 120%;
@@ -496,13 +508,22 @@ circle {
 
 .button:hover::after {
   bottom: -70%;
-  background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%),
-    radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+  background-image: radial-gradient(
+      circle,
+      var(--color-blue) 20%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(
+      circle,
+      transparent 10%,
+      var(--color-blue) 15%,
+      transparent 20%
+    ),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%),
+    radial-gradient(circle, var(--color-blue) 20%, transparent 20%);
   background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
   background-position: 50% 0%;
   animation: greenbottomBubbles 0.6s ease;

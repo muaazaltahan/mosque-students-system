@@ -34,16 +34,17 @@
           </select>
           <button class="btn" @click="sendMess()">إرسال الإشعار</button>
         </div>
-      </div>
-      <div class="center-load" v-if="isLoading">
-        <svg viewBox="25 25 50 50">
-          <circle r="20" cy="50" cx="50"></circle>
-        </svg>
+        <div class="center-load" v-if="isLoading">
+          <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+          </svg>
+        </div>
       </div>
     </div>
     <p v-if="submitStatus === 'success'" class="success-message">
       لقد تم الإرسال بنجاح
     </p>
+    <p v-if="errorMess" class="error-message">{{ errorMess }}</p>
     <p v-if="submitStatus === 'error'" class="error-message">
       .فشل إرسال المشكلة الخاص بك. يرجى المحاولة مرة أخرى
     </p>
@@ -66,6 +67,8 @@ export default {
         createdAt: new Date(),
       },
       submitStatus: "",
+      errorMess: "",
+      isLoading: false,
     };
   },
   components: {
@@ -73,8 +76,11 @@ export default {
   },
   methods: {
     async sendMess() {
-      if (!this.formData.title && !this.formData.content) {
-        this.submitStatus = "error, must full all input";
+      if (!this.formData.title || !this.formData.content) {
+        this.errorMess = "error, must full all input";
+        setTimeout(() => {
+          this.errorMess = "";
+        }, 2000);
       } else {
         this.isLoading = true;
         try {
@@ -93,6 +99,9 @@ export default {
 
           if (response.ok) {
             this.submitStatus = "success";
+            setTimeout(() => {
+              this.submitStatus = "";
+            }, 2000);
             this.formData = {
               title: "",
               content: "",
@@ -103,11 +112,16 @@ export default {
               createdAt: new Date(),
             };
           } else {
-            this.submitStatus = "error with send mess";
-            console.error("Submission failed:", response.statusText);
+            this.submitStatus = "error";
+            setTimeout(() => {
+              this.submitStatus = "";
+            }, 2000);
           }
         } catch (error) {
           this.submitStatus = "error";
+          setTimeout(() => {
+            this.submitStatus = "";
+          }, 2000);
           console.error("Submission failed:", error);
         } finally {
           this.isLoading = false;
